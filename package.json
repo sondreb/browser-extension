@@ -2,18 +2,27 @@
   "name": "browser-extension",
   "version": "1.0.0",
   "description": "Testing grounds for build browser extension on Manifest V3",
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sondreb/browser-extension/issues"
+  },
+  "homepage": "https://github.com/sondreb/browser-extension#readme",
   "main": "index.js",
   "scripts": {
+    "prebuild": "del-cli dist/",
+    "build": "tsc",
+    "postbuild": "copyFiles \"src/**/*\" -e \"src/*.ts\" -u 1 dist",
+    "postbuild3": "cpy src/**/* !src/*.ts ./dist --cwd=src --no-overwrite --parents",
+    "postbuild2": "cpy **/* !**/*.ts\" ../dist/ --cwd=src/ --no-overwrite --parents",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sondreb/browser-extension.git"
   },
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/sondreb/browser-extension/issues"
-  },
-  "homepage": "https://github.com/sondreb/browser-extension#readme"
+  "devDependencies": {
+    "copyfiles": "2.4.1",
+    "del-cli": "4.0.1"
+  }
 }
