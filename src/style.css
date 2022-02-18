@@ -1,0 +1,9 @@
+html {
+  width: 400px;
+  height: 500px;
+}
+
+body,
+main {
+  box-sizing: border-box;
+}
