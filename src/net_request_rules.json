@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "priority": 1,
+        "action": {
+            "type": "modifyHeaders",
+            "responseHeaders": [
+                {
+                    "header": "Google-Support",
+                    "operation": "set",
+                    "value": "0"
+                }
+            ]
+        },
+        "condition": {
+            "urlFilter": "*://*/*",
+            "resourceTypes": [
+                "main_frame"
+            ]
+        }
+    }
+]

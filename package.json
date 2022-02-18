@@ -1,0 +1,19 @@
+{
+  "name": "browser-extension",
+  "version": "1.0.0",
+  "description": "Testing grounds for build browser extension on Manifest V3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sondreb/browser-extension.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sondreb/browser-extension/issues"
+  },
+  "homepage": "https://github.com/sondreb/browser-extension#readme"
+}
