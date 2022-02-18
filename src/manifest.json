@@ -24,7 +24,8 @@
     "web_accessible_resources": [
         {
             "resources": [
-                "page.js"
+                "page.js",
+                "provider.js"
             ],
             "matches": [
                 "<all_urls>"
@@ -63,8 +64,7 @@
             ],
             "matches": [
                 "*://*/*"
-            ],
-            "run_at": "document_start"
+            ]
         }
     ]
 }

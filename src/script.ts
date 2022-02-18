@@ -48,5 +48,11 @@ document.getElementById('clear-button')?.addEventListener("click", async () => {
     console.log('session state was cleared');
 });
 
+chrome.action.setBadgeBackgroundColor(
+    { color: '#00FF00' },  // Also green
+    () => { /* ... */ },
+);
+
+
 
 // {get: ƒ, set: ƒ, remove: ƒ, clear: ƒ, getBytesInUse: ƒ, …}

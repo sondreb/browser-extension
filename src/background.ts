@@ -9,6 +9,8 @@
 // See https://developer.chrome.com/docs/extensions/reference/events/ for additional details.
 chrome.runtime.onInstalled.addListener(async () => {
 
+    console.log('ON INSTALLED!');
+
     // While we could have used `let url = "hello.html"`, using runtime.getURL is a bit more robust as
     // it returns a full URL rather than just a path that Chrome needs to be resolved contextually at
     // runtime.
@@ -29,5 +31,81 @@ chrome.runtime.onInstalled.addListener(async () => {
     // To view this log message, open chrome://extensions, find "Hello, World!", and click the
     // "service worker" link in th card to open DevTools.
     console.log(`Created tab ${tab.id}`);
+
+    chrome.contextMenus.create({
+        "id": "sampleContextMenu",
+        "title": "Sample Context Menu",
+        "contexts": ["selection"]
+    });
+
+    chrome.action.setBadgeText(
+        {
+            text: 'WHUT!',
+            tabId: tab.id,
+        },
+        () => { }
+    );
+
+    chrome.action.setBadgeBackgroundColor(
+        { color: '#00FF00' },  // Also green
+        () => { /* ... */ },
+    );
+
 });
 
+// chrome.action.onClicked.addListener(tab => {
+//     console.log('chrome.action.onClicked.addListener');
+//     debugger;
+//     let url = chrome.runtime.getURL("index.html");
+
+//     chrome.tabs.query({ url: url }, tabs => {
+//         console.log('tabs.length', tabs.length);
+//         if (tabs.length) {
+//             chrome.tabs.update(tabs[0].id as any)
+//         }
+//         else chrome.tabs.create({
+//             url: url,
+//             active: true,
+//             index: 0
+//         })
+//     });
+// });
+
+
+chrome.action.onClicked.addListener((tab) => {
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id! },
+        files: ['provider.js']
+    });
+});
+
+chrome.runtime.onMessage.addListener((message, sender, reply) => {
+    console.log('onMessage!!', message);
+    console.log('onMessage: sender!!', sender);
+    // chrome.runtime.onMessage.removeListener(event);
+});
+
+chrome.runtime.onSuspend.addListener(() => {
+    console.log("Unloading.");
+    chrome.browserAction.setBadgeText({ text: "" });
+});
+
+// chrome.runtime.onMessage.addListener((message, callback) => {
+//     const tabId = getForegroundTabId();
+//     if (message.data === "setAlarm") {
+//         chrome.alarms.create({ delayInMinutes: 5 })
+//     } else if (message.data === "runLogic") {
+//         chrome.scripting.executeScript({ file: 'logic.js', tabId });
+//     } else if (message.data === "changeColor") {
+//         chrome.scripting.executeScript(
+//             { func: () => document.body.style.backgroundColor = "orange", tabId });
+//     };
+// });
+
+// chrome.runtime.onMessage.addListener((message, callback) => {
+//     if (message === 'hello') {
+//         sendResponse({ greeting: 'welcome!' })
+//     } else if (message === 'goodbye') {
+//         chrome.runtime.Port.disconnect();
+//     }
+// });
