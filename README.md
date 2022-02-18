@@ -4,7 +4,7 @@ Testing grounds for build browser extension on Manifest V3.
 
 ## Requirements
 
-- Canary (nightly) build of Chrome or Edge.
+- Chrome or Edge
 - Node.js
 - TypeScript
 
